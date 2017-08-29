@@ -2,11 +2,15 @@ import QtQuick 2.7
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
+import brandon.SubCalc 1.0
+
 ApplicationWindow {
     visible: true
     width: 640
     height: 480
-    title: qsTr("Hello World")
+    title: qsTr("SubCalc")
+
+    property alias fsBox: fsBox
 
     SwipeView {
         id: swipeView
@@ -17,9 +21,20 @@ ApplicationWindow {
         }
 
         Page {
-            Label {
-                text: qsTr("Second page")
-                anchors.centerIn: parent
+            id: thePage
+            RowLayout {
+                id: theRow
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.topMargin: 20
+                anchors.top: parent.top
+
+                TextField {
+                    id: fsBox
+                    placeholderText: qsTr("Text Field")
+                    text: subCalc.fs
+                }
+
+
             }
         }
     }
@@ -33,5 +48,10 @@ ApplicationWindow {
         TabButton {
             text: qsTr("Second")
         }
+    }
+
+    SubCalc {
+        id: subCalc
+        fs: "Hello"
     }
 }
